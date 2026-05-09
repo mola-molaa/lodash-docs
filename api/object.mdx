@@ -1,0 +1,315 @@
+---
+title: 对象方法
+icon: 🗂️
+---
+
+<Heading level="1">
+    对象方法 API
+</Heading>
+
+<Paragraph>
+    Lodash 提供了丰富的对象操作方法。
+</Paragraph>
+
+<Divider blockColor="light_grey" />
+
+<Heading level="2">
+    基础操作
+</Heading>
+
+<Heading level="3">
+    \_.get
+</Heading>
+
+<Paragraph>
+    根据对象路径获取值，如果解析值为 undefined，返回默认值。
+</Paragraph>
+
+<Paragraph textAlign="left" blockColor="light_grey">
+<Mark bold>javascript</Mark>
+<Mark color="grey">var object = { 'a': [{ 'b': { 'c': 3 } }] };</Mark>
+<Mark color="grey">_.get(object, 'a[0].b.c', 'default');</Mark>
+<Mark color="grey">// => 3</Mark>
+<Mark color="grey">_.get(object, ['a', '0', 'b', 'c'], 'default');</Mark>
+<Mark color="grey">// => 3</Mark>
+</Paragraph>
+
+<Heading level="3">
+    \_.set
+</Heading>
+
+<Paragraph>
+    设置对象路径的值。如果路径不存在则创建。
+</Paragraph>
+
+<Paragraph textAlign="left" blockColor="light_grey">
+<Mark bold>javascript</Mark>
+<Mark color="grey">var object = { 'a': [{ 'b': { 'c': 3 } }] };</Mark>
+<Mark color="grey">_.set(object, 'a[0].b.c', 4);</Mark>
+<Mark color="grey">// => { 'a': [{ 'b': { 'c': 4 } }] }</Mark>
+</Paragraph>
+
+<Heading level="3">
+    \_.unset
+</Heading>
+
+<Paragraph>
+    移除对象路径的属性。
+</Paragraph>
+
+<Paragraph textAlign="left" blockColor="light_grey">
+<Mark bold>javascript</Mark>
+<Mark color="grey">var object = { 'a': [{ 'b': { 'c': 7 } }] };</Mark>
+<Mark color="grey">_.unset(object, 'a[0].b.c');</Mark>
+<Mark color="grey">// => { 'a': [{ 'b': {} }] }</Mark>
+</Paragraph>
+
+<Divider blockColor="light_grey" />
+
+<Heading level="2">
+    对象合并与分配
+</Heading>
+
+<Heading level="3">
+    \_.assign
+</Heading>
+
+<Paragraph>
+    分配来源对象的可枚举属性到目标对象。
+</Paragraph>
+
+<Paragraph textAlign="left" blockColor="light_grey">
+<Mark bold>javascript</Mark>
+<Mark color="grey">function Foo() { this.a = 1; }</Mark>
+<Mark color="grey">function Bar() { this.b = 2; }</Mark>
+<Mark color="grey">Foo.prototype.c = 3;</Mark>
+<Mark color="grey">Bar.prototype.d = 4;</Mark>
+<Mark color="grey"></Mark>
+<Mark color="grey">_.assign({ 'a': 0 }, new Foo, new Bar);</Mark>
+<Mark color="grey">// => { 'a': 1, 'b': 2 }</Mark>
+</Paragraph>
+
+<Heading level="3">
+    \_.defaults
+</Heading>
+
+<Paragraph>
+    分配来源对象的可枚举属性到目标对象，除非该属性已存在。
+</Paragraph>
+
+<Paragraph textAlign="left" blockColor="light_grey">
+<Mark bold>javascript</Mark>
+<Mark color="grey">_.defaults({ 'a': 1 }, { 'b': 2 }, { 'a': 3 });</Mark>
+<Mark color="grey">// => { 'a': 1, 'b': 2 }</Mark>
+</Paragraph>
+
+<Heading level="3">
+    \_.merge
+</Heading>
+
+<Paragraph>
+    递归合并来源对象的属性到目标对象。
+</Paragraph>
+
+<Paragraph textAlign="left" blockColor="light_grey">
+<Mark bold>javascript</Mark>
+<Mark color="grey">var object = {</Mark>
+<Mark color="grey">  'a': [{ 'b': 2 }, { 'd': 4 }]</Mark>
+<Mark color="grey">};</Mark>
+<Mark color="grey"></Mark>
+<Mark color="grey">var other = {</Mark>
+<Mark color="grey">  'a': [{ 'c': 3 }, { 'e': 5 }]</Mark>
+<Mark color="grey">};</Mark>
+<Mark color="grey"></Mark>
+<Mark color="grey">_.merge(object, other);</Mark>
+<Mark color="grey">// => { 'a': [{ 'b': 2, 'c': 3 }, { 'd': 4, 'e': 5 }] }</Mark>
+</Paragraph>
+
+<Divider blockColor="light_grey" />
+
+<Heading level="2">
+    对象查询
+</Heading>
+
+<Heading level="3">
+    \_.has
+</Heading>
+
+<Paragraph>
+    检查路径是否是对象的直接属性。
+</Paragraph>
+
+<Paragraph textAlign="left" blockColor="light_grey">
+<Mark bold>javascript</Mark>
+<Mark color="grey">var object = { 'a': { 'b': 2 } };</Mark>
+<Mark color="grey">_.has(object, 'a.b');</Mark>
+<Mark color="grey">// => true</Mark>
+<Mark color="grey">_.has(object, 'a.c');</Mark>
+<Mark color="grey">// => false</Mark>
+</Paragraph>
+
+<Heading level="3">
+    \_.keys
+</Heading>
+
+<Paragraph>
+    创建一个包含对象自身可枚举属性名的数组。
+</Paragraph>
+
+<Paragraph textAlign="left" blockColor="light_grey">
+<Mark bold>javascript</Mark>
+<Mark color="grey">function Foo() { this.a = 1; this.b = 2; }</Mark>
+<Mark color="grey">Foo.prototype.c = 3;</Mark>
+<Mark color="grey"></Mark>
+<Mark color="grey">_.keys(new Foo);</Mark>
+<Mark color="grey">// => ['a', 'b'] (不迭代继承的属性)</Mark>
+</Paragraph>
+
+<Heading level="3">
+    \_.values
+</Heading>
+
+<Paragraph>
+    创建一个包含对象自身可枚举属性值的数组。
+</Paragraph>
+
+<Paragraph textAlign="left" blockColor="light_grey">
+<Mark bold>javascript</Mark>
+<Mark color="grey">function Foo() { this.a = 1; this.b = 2; }</Mark>
+<Mark color="grey">Foo.prototype.c = 3;</Mark>
+<Mark color="grey"></Mark>
+<Mark color="grey">_.values(new Foo);</Mark>
+<Mark color="grey">// => [1, 2] (不迭代继承的属性)</Mark>
+</Paragraph>
+
+<Heading level="3">
+    \_.pairs
+</Heading>
+
+<Paragraph>
+    创建一个键值对数组。
+</Paragraph>
+
+<Paragraph textAlign="left" blockColor="light_grey">
+<Mark bold>javascript</Mark>
+<Mark color="grey">_.pairs({ 'a': 1, 'b': 2 });</Mark>
+<Mark color="grey">// => [['a', 1], ['b', 2]]</Mark>
+</Paragraph>
+
+<Divider blockColor="light_grey" />
+
+<Heading level="2">
+    对象过滤
+</Heading>
+
+<Heading level="3">
+    \_.pick
+</Heading>
+
+<Paragraph>
+    创建一个只包含指定属性的对象。
+</Paragraph>
+
+<Paragraph textAlign="left" blockColor="light_grey">
+<Mark bold>javascript</Mark>
+<Mark color="grey">var object = { 'a': 1, 'b': 2, 'c': 3 };</Mark>
+<Mark color="grey">_.pick(object, ['a', 'c']);</Mark>
+<Mark color="grey">// => { 'a': 1, 'c': 3 }</Mark>
+</Paragraph>
+
+<Heading level="3">
+    \_.omit
+</Heading>
+
+<Paragraph>
+    创建一个排除指定属性的对象。
+</Paragraph>
+
+<Paragraph textAlign="left" blockColor="light_grey">
+<Mark bold>javascript</Mark>
+<Mark color="grey">var object = { 'a': 1, 'b': 2, 'c': 3 };</Mark>
+<Mark color="grey">_.omit(object, ['a', 'c']);</Mark>
+<Mark color="grey">// => { 'b': 2 }</Mark>
+</Paragraph>
+
+<Divider blockColor="light_grey" />
+
+<Heading level="2">
+    类型检查
+</Heading>
+
+<Heading level="3">
+    \_.isEqual
+</Heading>
+
+<Paragraph>
+    执行深比较，确定两个值是否相等。
+</Paragraph>
+
+<Paragraph textAlign="left" blockColor="light_grey">
+<Mark bold>javascript</Mark>
+<Mark color="grey">var object = { 'a': 1 };</Mark>
+<Mark color="grey">var other = { 'a': 1 };</Mark>
+<Mark color="grey">_.isEqual(object, other);</Mark>
+<Mark color="grey">// => true</Mark>
+</Paragraph>
+
+<Heading level="3">
+    \_.isArray, \_.isObject, \_.isFunction 等
+</Heading>
+
+<Paragraph>
+    检查值的类型。
+</Paragraph>
+
+<Paragraph textAlign="left" blockColor="light_grey">
+<Mark bold>javascript</Mark>
+<Mark color="grey">_.isArray([1, 2, 3]);</Mark>
+<Mark color="grey">// => true</Mark>
+<Mark color="grey">_.isObject({});</Mark>
+<Mark color="grey">// => true</Mark>
+<Mark color="grey">_.isFunction(_.map);</Mark>
+<Mark color="grey">// => true</Mark>
+</Paragraph>
+
+<Divider blockColor="light_grey" />
+
+<Heading level="2">
+    FP 模块中的对象方法
+</Heading>
+
+<Paragraph>
+    在 FP 模块中，对象方法变为不可变操作：
+</Paragraph>
+
+<Paragraph textAlign="left" blockColor="light_grey">
+<Mark bold>javascript</Mark>
+<Mark color="grey">var fp = require('lodash/fp');</Mark>
+<Mark color="grey"></Mark>
+<Mark color="grey">var object = { 'a': { 'b': 2, 'c': 3 } };</Mark>
+<Mark color="grey">var result = fp.set('a.b')(3)(object);</Mark>
+<Mark color="grey"></Mark>
+<Mark color="grey">console.log(object);</Mark>
+<Mark color="grey">// => { 'a': { 'b': 2, 'c': 3 } } - 原对象未修改</Mark>
+<Mark color="grey"></Mark>
+<Mark color="grey">console.log(result);</Mark>
+<Mark color="grey">// => { 'a': { 'b': 3, 'c': 3 } } - 返回新对象</Mark>
+</Paragraph>
+
+<Paragraph>
+    FP 模块中的 <Mark>assign</Mark>、<Mark>defaults</Mark>、<Mark>merge</Mark> 等方法也不会修改原对象：
+</Paragraph>
+
+<Paragraph textAlign="left" blockColor="light_grey">
+<Mark bold>javascript</Mark>
+<Mark color="grey">var fp = require('lodash/fp');</Mark>
+<Mark color="grey"></Mark>
+<Mark color="grey">var object = { 'a': 1 };</Mark>
+<Mark color="grey">var result = fp.assign(object)({ 'b': 2 });</Mark>
+<Mark color="grey"></Mark>
+<Mark color="grey">console.log(object);</Mark>
+<Mark color="grey">// => { 'a': 1 } - 原对象未修改</Mark>
+<Mark color="grey"></Mark>
+<Mark color="grey">console.log(result);</Mark>
+<Mark color="grey">// => { 'a': 1, 'b': 2 } - 返回新对象</Mark>
+</Paragraph>
