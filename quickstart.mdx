@@ -1,0 +1,145 @@
+---
+title: 快速开始
+icon: 🚀
+---
+
+<Heading level="1">
+    快速开始
+</Heading>
+
+<Paragraph>
+    本指南将帮助你在几分钟内开始使用 Lodash。
+</Paragraph>
+
+<Divider blockColor="light_grey" />
+
+<Heading level="2">
+    浏览器环境
+</Heading>
+
+<Paragraph>
+    在浏览器中直接使用 Lodash：
+</Paragraph>
+
+<Paragraph textAlign="left" blockColor="light_grey">
+<Mark bold>html</Mark>
+<Mark color="grey">&#60;script src="lodash.js"&#62;&#60;/script&#62;</Mark>
+</Paragraph>
+
+<Divider blockColor="light_grey" />
+
+<Heading level="2">
+    使用 npm 安装
+</Heading>
+
+<Paragraph>
+    首先确保已安装 npm：
+</Paragraph>
+
+<Paragraph textAlign="left" blockColor="light_grey">
+<Mark bold>shell</Mark>
+<Mark color="grey">$ npm i -g npm</Mark>
+<Mark color="grey">$ npm i --save lodash</Mark>
+</Paragraph>
+
+<Divider blockColor="light_grey" />
+
+<Heading level="2">
+    Node.js 环境
+</Heading>
+
+<Paragraph>
+    在 Node.js 中引入 Lodash 的不同方式：
+</Paragraph>
+
+<Paragraph textAlign="left" blockColor="light_grey">
+<Mark bold>javascript</Mark>
+<Mark color="grey">// 加载完整构建</Mark>
+<Mark color="grey">var _ = require('lodash');</Mark>
+<Mark color="grey"></Mark>
+<Mark color="grey">// 加载核心构建</Mark>
+<Mark color="grey">var _ = require('lodash/core');</Mark>
+<Mark color="grey"></Mark>
+<Mark color="grey">// 加载 FP 构建（不可变、自动柯里化、iteratee-first data-last 方法）</Mark>
+<Mark color="grey">var fp = require('lodash/fp');</Mark>
+</Paragraph>
+
+<Divider blockColor="light_grey" />
+
+<Heading level="2">
+    模块化引入
+</Heading>
+
+<Paragraph>
+    为了更小的打包体积，可以按类别或单独引入方法：
+</Paragraph>
+
+<Paragraph textAlign="left" blockColor="light_grey">
+<Mark bold>javascript</Mark>
+<Mark color="grey">// 按类别引入</Mark>
+<Mark color="grey">var array = require('lodash/array');</Mark>
+<Mark color="grey">var object = require('lodash/fp/object');</Mark>
+<Mark color="grey"></Mark>
+<Mark color="grey">// 按需引入单个方法（支持 tree-shaking）</Mark>
+<Mark color="grey">var at = require('lodash/at');</Mark>
+<Mark color="grey">var curryN = require('lodash/fp/curryN');</Mark>
+</Paragraph>
+
+<Divider blockColor="light_grey" />
+
+<Heading level="2">
+    基本使用示例
+</Heading>
+
+<Paragraph>
+    以下是一些常见的 Lodash 使用示例：
+</Paragraph>
+
+<Paragraph textAlign="left" blockColor="light_grey">
+<Mark bold>javascript</Mark>
+<Mark color="grey">var _ = require('lodash');</Mark>
+<Mark color="grey"></Mark>
+<Mark color="grey">// 数组操作</Mark>
+<Mark color="grey">_.map([1, 2, 3], function(n) { return n * 2; });</Mark>
+<Mark color="grey">// => [2, 4, 6]</Mark>
+<Mark color="grey"></Mark>
+<Mark color="grey">// 对象操作</Mark>
+<Mark color="grey">_.get({ a: { b: 2 } }, 'a.b', 'default');</Mark>
+<Mark color="grey">// => 2</Mark>
+<Mark color="grey"></Mark>
+<Mark color="grey">// 函数组合</Mark>
+<Mark color="grey">var greet = _.partial(_.join, _, ' ');</Mark>
+<Mark color="grey">greet(['hello', 'world']);</Mark>
+<Mark color="grey">// => 'hello world'</Mark>
+</Paragraph>
+
+<Divider blockColor="light_grey" />
+
+<Heading level="2">
+    CDN 使用
+</Heading>
+
+<Paragraph>
+    可以通过 CDN 快速引入 Lodash：
+</Paragraph>
+
+<BulletedList>
+    <Mark bold>jsDelivr</Mark> - https://www.jsdelivr.com/projects/lodash
+    <Mark bold>Unpkg</Mark> - https://unpkg.com/lodash@4.18.1/lodash.js
+</BulletedList>
+
+<Divider blockColor="light_grey" />
+
+<Heading level="2">
+    下一步
+</Heading>
+
+<Paragraph>
+    现在你已经设置好了 Lodash，可以：
+</Paragraph>
+
+<BulletedList>
+    浏览 <Link href="api/array">API 参考文档</Link> 了解所有可用方法
+    查看 <Link href="fp/introduction">FP 模块指南</Link> 学习函数式编程风格
+    阅读 <Link href="configuration">配置说明</Link> 了解构建差异
+</BulletedList>
