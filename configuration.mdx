@@ -1,0 +1,314 @@
+---
+title: 配置说明
+icon: ⚙️
+---
+
+<Heading level="1">
+    配置说明
+</Heading>
+
+<Paragraph>
+    了解 Lodash 的构建差异和配置选项。
+</Paragraph>
+
+<Divider blockColor="light_grey" />
+
+<Heading level="2">
+    构建差异
+</Heading>
+
+<Paragraph>
+    Lodash 提供多种构建版本，适应不同使用场景：
+</Paragraph>
+
+<Table>
+    <TableRow>
+        <TableCell>
+            <Mark bold>构建版本</Mark>
+        </TableCell>
+        <TableCell>
+            <Mark bold>文件大小</Mark>
+        </TableCell>
+        <TableCell>
+            <Mark bold>说明</Mark>
+        </TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>
+            Full Build
+        </TableCell>
+        <TableCell>
+            ~24 kB gzipped
+        </TableCell>
+        <TableCell>
+            完整功能，包含所有方法
+        </TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>
+            Core Build
+        </TableCell>
+        <TableCell>
+            ~4 kB gzipped
+        </TableCell>
+        <TableCell>
+            核心方法，体积更小
+        </TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>
+            FP Build
+        </TableCell>
+        <TableCell>
+            类似完整版
+        </TableCell>
+        <TableCell>
+            函数式编程风格，自动柯里化
+        </TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>
+            ES Module
+        </TableCell>
+        <TableCell>
+            取决于引入
+        </TableCell>
+        <TableCell>
+            lodash-es，支持 tree-shaking
+        </TableCell>
+    </TableRow>
+</Table>
+
+<Divider blockColor="light_grey" />
+
+<Heading level="2">
+    下载链接
+</Heading>
+
+<Paragraph>
+    各版本的直接下载链接：
+</Paragraph>
+
+<BulletedList>
+    <Mark bold>Core build</Mark> - <Link href="https://raw.githubusercontent.com/lodash/lodash/4.18.1/dist/lodash.core.js">lodash.core.js</Link> (<Link href="https://raw.githubusercontent.com/lodash/lodash/4.18.1/dist/lodash.core.min.js">minified</Link>, ~4 kB gzipped)
+    <Mark bold>Full build</Mark> - <Link href="https://raw.githubusercontent.com/lodash/lodash/4.18.1/dist/lodash.js">lodash.js</Link> (<Link href="https://raw.githubusercontent.com/lodash/lodash/4.18.1/dist/lodash.min.js">minified</Link>, ~24 kB gzipped)
+    <Mark bold>CDN copies</Mark> - <Link href="https://www.jsdelivr.com/projects/lodash">jsDelivr</Link>
+</BulletedList>
+
+<Divider blockColor="light_grey" />
+
+<Heading level="2">
+    npm 配置
+</Heading>
+
+<Paragraph>
+    Lodash 的 package.json 配置：
+</Paragraph>
+
+<Paragraph textAlign="left" blockColor="light_grey">
+<Mark bold>json</Mark>
+<Mark color="grey">{</Mark>
+<Mark color="grey">  "name": "lodash",</Mark>
+<Mark color="grey">  "version": "4.18.1",</Mark>
+<Mark color="grey">  "license": "MIT",</Mark>
+<Mark color="grey">  "private": true,</Mark>
+<Mark color="grey">  "main": "lodash.js",</Mark>
+<Mark color="grey">  "engines": {</Mark>
+<Mark color="grey">    "node": ">=4.0.0"</Mark>
+<Mark color="grey">  }</Mark>
+<Mark color="grey">}</Mark>
+</Paragraph>
+
+<Divider blockColor="light_grey" />
+
+<Heading level="2">
+    可用脚本
+</Heading>
+
+<Paragraph>
+    通过 npm run 执行的脚本命令：
+</Paragraph>
+
+<Table>
+    <TableRow>
+        <TableCell>
+            <Mark bold>命令</Mark>
+        </TableCell>
+        <TableCell>
+            <Mark bold>说明</Mark>
+        </TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>
+            npm run build
+        </TableCell>
+        <TableCell>
+            构建完整版本（main + fp）
+        </TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>
+            npm run build:main
+        </TableCell>
+        <TableCell>
+            构建主库浏览器版本
+        </TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>
+            npm run build:fp
+        </TableCell>
+        <TableCell>
+            构建 FP 模块浏览器版本
+        </TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>
+            npm test
+        </TableCell>
+        <TableCell>
+            运行所有测试（main + fp）
+        </TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>
+            npm run doc
+        </TableCell>
+        <TableCell>
+            生成 GitHub 和网站格式文档
+        </TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>
+            npm run validate
+        </TableCell>
+        <TableCell>
+            运行代码风格检查和测试
+        </TableCell>
+    </TableRow>
+</Table>
+
+<Divider blockColor="light_grey" />
+
+<Heading level="2">
+    模块化引入
+</Heading>
+
+<Paragraph>
+    为了更小的打包体积，可以按类别或单独引入方法：
+</Paragraph>
+
+<Paragraph textAlign="left" blockColor="light_grey">
+<Mark bold>javascript</Mark>
+<Mark color="grey">// 按类别引入</Mark>
+<Mark color="grey">var array = require('lodash/array');</Mark>
+<Mark color="grey">var object = require('lodash/fp/object');</Mark>
+<Mark color="grey"></Mark>
+<Mark color="grey">// 按需引入单个方法（支持 tree-shaking）</Mark>
+<Mark color="grey">var at = require('lodash/at');</Mark>
+<Mark color="grey">var curryN = require('lodash/fp/curryN');</Mark>
+</Paragraph>
+
+<Divider blockColor="light_grey" />
+
+<Heading level="2">
+    FP 模块配置
+</Heading>
+
+<Paragraph>
+    FP 模块通过 <Mark>convert</Mark> 函数支持配置选项：
+</Paragraph>
+
+<Table>
+    <TableRow>
+        <TableCell>
+            <Mark bold>选项</Mark>
+        </TableCell>
+        <TableCell>
+            <Mark bold>默认值</Mark>
+        </TableCell>
+        <TableCell>
+            <Mark bold>说明</Mark>
+        </TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>
+            cap
+        </TableCell>
+        <TableCell>
+            true
+        </TableCell>
+        <TableCell>
+            限制 iteratee 的参数数量
+        </TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>
+            curry
+        </TableCell>
+        <TableCell>
+            true
+        </TableCell>
+        <TableCell>
+            启用自动柯里化
+        </TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>
+            fixed
+        </TableCell>
+        <TableCell>
+            true
+        </TableCell>
+        <TableCell>
+            固定参数数量
+        </TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>
+            immutable
+        </TableCell>
+        <TableCell>
+            true
+        </TableCell>
+        <TableCell>
+            不可变操作
+        </TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>
+            rearg
+        </TableCell>
+        <TableCell>
+            true
+        </TableCell>
+        <TableCell>
+            重排参数顺序
+        </TableCell>
+    </TableRow>
+</Table>
+
+<Paragraph textAlign="left" blockColor="light_grey">
+<Mark bold>javascript</Mark>
+<Mark color="grey">var fp = require('lodash/fp');</Mark>
+<Mark color="grey"></Mark>
+<Mark color="grey">// 创建自定义配置的 Lodash 实例</Mark>
+<Mark color="grey">var custom = fp.runInContext({</Mark>
+<Mark color="grey">  'cap': false,</Mark>
+<Mark color="grey">  'curry': true</Mark>
+<Mark color="grey">});</Mark>
+</Paragraph>
+
+<Divider blockColor="light_grey" />
+
+<Heading level="2">
+    浏览器支持
+</Heading>
+
+<Paragraph>
+    Lodash 支持现代浏览器环境，Node.js 要求版本 >= 4.0.0。
+</Paragraph>
+
+<Callout icon="ℹ️" blockColor="light_blue" borderColor="blue">
+    Lodash 经过优化，可在多种 JavaScript 运行时中工作，包括 Node.js、浏览器、Deno 等。
+</Callout>
