@@ -1,0 +1,304 @@
+---
+title: 数组方法
+icon: 📦
+---
+
+<Heading level="1">
+    数组方法 API
+</Heading>
+
+<Paragraph>
+    Lodash 提供了丰富的数组操作方法。
+</Paragraph>
+
+<Divider blockColor="light_grey" />
+
+<Heading level="2">
+    基础操作
+</Heading>
+
+<Heading level="3">
+    \_.chunk
+</Heading>
+
+<Paragraph>
+    将数组分割成指定长度的块。
+</Paragraph>
+
+<Paragraph textAlign="left" blockColor="light_grey">
+<Mark bold>javascript</Mark>
+<Mark color="grey">\_.chunk(['a', 'b', 'c', 'd'], 2);</Mark>
+<Mark color="grey">// => [['a', 'b'], ['c', 'd']]</Mark>
+</Paragraph>
+
+<Heading level="3">
+    \_.compact
+</Heading>
+
+<Paragraph>
+    创建一个新数组，过滤掉所有假值（false、null、0、""、undefined、NaN）。
+</Paragraph>
+
+<Paragraph textAlign="left" blockColor="light_grey">
+<Mark bold>javascript</Mark>
+<Mark color="grey">\_.compact([0, 1, false, 2, '', 3]);</Mark>
+<Mark color="grey">// => [1, 2, 3]</Mark>
+</Paragraph>
+
+<Heading level="3">
+    \_.concat
+</Heading>
+
+<Paragraph>
+    创建一个新数组，将数组或值连接到一起。
+</Paragraph>
+
+<Paragraph textAlign="left" blockColor="light_grey">
+<Mark bold>javascript</Mark>
+<Mark color="grey">var array = [1];</Mark>
+<Mark color="grey">var other = \_.concat(array, 2, [3], [[4]]);</Mark>
+<Mark color="grey">// => [1, 2, 3, [4]]</Mark>
+</Paragraph>
+
+<Divider blockColor="light_grey" />
+
+<Heading level="2">
+    查找与过滤
+</Heading>
+
+<Heading level="3">
+    \_.find
+</Heading>
+
+<Paragraph>
+    遍历数组元素，返回第一个通过 predicate 判断的元素。
+</Paragraph>
+
+<Paragraph textAlign="left" blockColor="light_grey">
+<Mark bold>javascript</Mark>
+<Mark color="grey">var users = [</Mark>
+<Mark color="grey">  { 'user': 'barney', 'age': 36, 'active': true },</Mark>
+<Mark color="grey">  { 'user': 'fred',   'age': 40, 'active': false }</Mark>
+<Mark color="grey">];</Mark>
+<Mark color="grey"></Mark>
+<Mark color="grey">\_.find(users, function(o) { return o.age < 40; });</Mark>
+<Mark color="grey">// => { 'user': 'barney', 'age': 36, 'active': true }</Mark>
+</Paragraph>
+
+<Heading level="3">
+    \_.filter
+</Heading>
+
+<Paragraph>
+    遍历数组元素，返回所有通过 predicate 判断的元素组成的新数组。
+</Paragraph>
+
+<Paragraph textAlign="left" blockColor="light_grey">
+<Mark bold>javascript</Mark>
+<Mark color="grey">\_.filter(users, function(o) { return !o.active; });</Mark>
+<Mark color="grey">// => [{ 'user': 'fred', 'age': 40, 'active': false }]</Mark>
+</Paragraph>
+
+<Heading level="3">
+    \_.reject
+</Heading>
+
+<Paragraph>
+    与 <Mark>filter</Mark> 相反，返回所有 <Mark>不通过</Mark> predicate 判断的元素。
+</Paragraph>
+
+<Paragraph textAlign="left" blockColor="light_grey">
+<Mark bold>javascript</Mark>
+<Mark color="grey">\_.reject(users, function(o) { return o.active; });</Mark>
+<Mark color="grey">// => [{ 'user': 'fred', 'age': 40, 'active': false }]</Mark>
+</Paragraph>
+
+<Divider blockColor="light_grey" />
+
+<Heading level="2">
+    集合操作
+</Heading>
+
+<Heading level="3">
+    \_.uniq
+</Heading>
+
+<Paragraph>
+    创建一个去重后的数组副本。
+</Paragraph>
+
+<Paragraph textAlign="left" blockColor="light_grey">
+<Mark bold>javascript</Mark>
+<Mark color="grey">\_.uniq([2, 1, 2]);</Mark>
+<Mark color="grey">// => [2, 1]</Mark>
+</Paragraph>
+
+<Heading level="3">
+    \_.union
+</Heading>
+
+<Paragraph>
+    创建一个按顺序包含所有给定数组唯一值的数组。
+</Paragraph>
+
+<Paragraph textAlign="left" blockColor="light_grey">
+<Mark bold>javascript</Mark>
+<Mark color="grey">\_.union([2], [1, 2]);</Mark>
+<Mark color="grey">// => [2, 1]</Mark>
+</Paragraph>
+
+<Heading level="3">
+    \_.intersection
+</Heading>
+
+<Paragraph>
+    创建一个包含所有给定数组都存在的元素的新数组。
+</Paragraph>
+
+<Paragraph textAlign="left" blockColor="light_grey">
+<Mark bold>javascript</Mark>
+<Mark color="grey">\_.intersection([2, 1], [2, 3]);</Mark>
+<Mark color="grey">// => [2]</Mark>
+</Paragraph>
+
+<Heading level="3">
+    \_.difference
+</Heading>
+
+<Paragraph>
+    创建一个新数组，包含所有在第一个数组中但不在其他数组中的值。
+</Paragraph>
+
+<Paragraph textAlign="left" blockColor="light_grey">
+<Mark bold>javascript</Mark>
+<Mark color="grey">\_.difference([2, 1], [2, 3]);</Mark>
+<Mark color="grey">// => [1]</Mark>
+</Paragraph>
+
+<Divider blockColor="light_grey" />
+
+<Heading level="2">
+    遍历与转换
+</Heading>
+
+<Heading level="3">
+    \_.map
+</Heading>
+
+<Paragraph>
+    创建一个新数组，包含原数组每个元素调用 iteratee 后的返回值。
+</Paragraph>
+
+<Paragraph textAlign="left" blockColor="light_grey">
+<Mark bold>javascript</Mark>
+<Mark color="grey">function square(n) { return n * n; }</Mark>
+<Mark color="grey">\_.map([4, 8], square);</Mark>
+<Mark color="grey">// => [16, 64]</Mark>
+</Paragraph>
+
+<Heading level="3">
+    \_.forEach
+</Heading>
+
+<Paragraph>
+    遍历数组的每个元素并调用 iteratee。
+</Paragraph>
+
+<Paragraph textAlign="left" blockColor="light_grey">
+<Mark bold>javascript</Mark>
+<Mark color="grey">\_.forEach([1, 2], function(value) {</Mark>
+<Mark color="grey">  console.log(value);</Mark>
+<Mark color="grey">});</Mark>
+<Mark color="grey">// => 输出 1, 2</Mark>
+</Paragraph>
+
+<Heading level="3">
+    \_.reduce
+</Heading>
+
+<Paragraph>
+    压缩数组为一个值，对每个元素执行 iteratee 并传入累加结果。
+</Paragraph>
+
+<Paragraph textAlign="left" blockColor="light_grey">
+<Mark bold>javascript</Mark>
+<Mark color="grey">\_.reduce([1, 2, 3], function(sum, n) {</Mark>
+<Mark color="grey">  return sum + n;</Mark>
+<Mark color="grey">}, 0);</Mark>
+<Mark color="grey">// => 6</Mark>
+</Paragraph>
+
+<Divider blockColor="light_grey" />
+
+<Heading level="2">
+    切片与拼接
+</Heading>
+
+<Heading level="3">
+    \_.slice
+</Heading>
+
+<Paragraph>
+    裁剪数组，从 start 位置开始到 end 位置结束（不包含 end）。
+</Paragraph>
+
+<Paragraph textAlign="left" blockColor="light_grey">
+<Mark bold>javascript</Mark>
+<Mark color="grey">\_.slice([1, 2, 3, 4], 1, 3);</Mark>
+<Mark color="grey">// => [2, 3]</Mark>
+</Paragraph>
+
+<Heading level="3">
+    \_.take
+</Heading>
+
+<Paragraph>
+    创建一个包含数组前 n 个元素的新数组。
+</Paragraph>
+
+<Paragraph textAlign="left" blockColor="light_grey">
+<Mark bold>javascript</Mark>
+<Mark color="grey">\_.take([1, 2, 3], 2);</Mark>
+<Mark color="grey">// => [1, 2]</Mark>
+</Paragraph>
+
+<Heading level="3">
+    \_.drop
+</Heading>
+
+<Paragraph>
+    创建一个切片数组，去除前 n 个元素。
+</Paragraph>
+
+<Paragraph textAlign="left" blockColor="light_grey">
+<Mark bold>javascript</Mark>
+<Mark color="grey">\_.drop([1, 2, 3], 2);</Mark>
+<Mark color="grey">// => [3]</Mark>
+</Paragraph>
+
+<Divider blockColor="light_grey" />
+
+<Heading level="2">
+    FP 模块中的数组方法
+</Heading>
+
+<Paragraph>
+    在 FP 模块中，数组方法的参数顺序被调整为 <Mark bold>data-last</Mark>：
+</Paragraph>
+
+<Paragraph textAlign="left" blockColor="light_grey">
+<Mark bold>javascript</Mark>
+<Mark color="grey">var fp = require('lodash/fp');</Mark>
+<Mark color="grey"></Mark>
+<Mark color="grey">// 传统方式</Mark>
+<Mark color="grey">\_.map([1, 2, 3], function(n) { return n * 2; });</Mark>
+<Mark color="grey"></Mark>
+<Mark color="grey">// FP 方式</Mark>
+<Mark color="grey">fp.map(function(n) { return n * 2; })([1, 2, 3]);</Mark>
+<Mark color="grey">// => [2, 4, 6]</Mark>
+<Mark color="grey"></Mark>
+<Mark color="grey">// 柯里化</Mark>
+<Mark color="grey">var double = fp.map(function(n) { return n * 2; });</Mark>
+<Mark color="grey">double([1, 2, 3]);</Mark>
+<Mark color="grey">// => [2, 4, 6]</Mark>
+</Paragraph>
