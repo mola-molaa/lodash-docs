@@ -1,0 +1,234 @@
+---
+title: 架构概览
+icon: 🏗️
+---
+
+<Heading level="1">
+    架构概览
+</Heading>
+
+<Paragraph>
+    了解 Lodash 的内部架构和模块组织方式。
+</Paragraph>
+
+<Divider blockColor="light_grey" />
+
+<Heading level="2">
+    项目结构
+</Heading>
+
+<Paragraph>
+    Lodash 仓库的主要目录结构：
+</Paragraph>
+
+<Paragraph textAlign="left" blockColor="light_grey">
+<Mark bold>text</Mark>
+<Mark color="grey">lodash/</Mark>
+<Mark color="grey">├── lodash.js          # 主入口文件（完整构建）</Mark>
+<Mark color="grey">├── fp/                 # 函数式编程模块</Mark>
+<Mark color="grey">│   ├── _baseConvert.js  # FP 转换核心</Mark>
+<Mark color="grey">│   ├── _mapping.js     # 方法映射配置</Mark>
+<Mark color="grey">│   └── _convertBrowser.js</Mark>
+<Mark color="grey">├── lib/                # 构建和文档生成脚本</Mark>
+<Mark color="grey">│   ├── main/          # 主库构建脚本</Mark>
+<Mark color="grey">│   ├── fp/            # FP 模块构建脚本</Mark>
+<Mark color="grey">│   └── common/        # 共享工具和配置</Mark>
+<Mark color="grey">├── dist/               # 构建输出目录</Mark>
+<Mark color="grey">├── test/               # 测试文件</Mark>
+<Mark color="grey">└── perf/               # 性能测试</Mark>
+</Paragraph>
+
+<Divider blockColor="light_grey" />
+
+<Heading level="2">
+    核心模块
+</Heading>
+
+<Heading level="3">
+    📦 主库（lodash.js）
+</Heading>
+
+<Paragraph>
+    主入口文件暴露了所有 Lodash 方法，支持 UMD 格式，可以在浏览器、Node.js 和 AMD 环境中使用。
+</Paragraph>
+
+<Heading level="3">
+    🔧 构建系统（lib/）
+</Heading>
+
+<Paragraph>
+    构建系统由以下部分组成：
+</Paragraph>
+
+<Table>
+    <TableRow>
+        <TableCell>
+            <Mark bold>模块</Mark>
+        </TableCell>
+        <TableCell>
+            <Mark bold>功能</Mark>
+        </TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>
+            lib/main/build-dist.js
+        </TableCell>
+        <TableCell>
+            构建浏览器版本的 lodash.js 和 lodash.min.js
+        </TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>
+            lib/main/build-modules.js
+        </TableCell>
+        <TableCell>
+            构建补充模块（core.js 等）
+        </TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>
+            lib/main/build-doc.js
+        </TableCell>
+        <TableCell>
+            生成 GitHub 和网站格式的文档
+        </TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>
+            lib/fp/build-dist.js
+        </TableCell>
+        <TableCell>
+            构建 FP 版本的浏览器包
+        </TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>
+            lib/fp/build-modules.js
+        </TableCell>
+        <TableCell>
+            生成 FP 模块文件
+        </TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>
+            lib/common/
+        </TableCell>
+        <TableCell>
+            共享工具：文件操作、映射配置、压缩等
+        </TableCell>
+    </TableRow>
+</Table>
+
+<Divider blockColor="light_grey" />
+
+<Heading level="2">
+    FP 模块架构
+</Heading>
+
+<Paragraph>
+    <Mark bold>lodash/fp</Mark> 是一个独立的模块，提供不可变、自动柯里化、iteratee-first data-last 风格的方法。
+</Paragraph>
+
+<Heading level="3">
+    核心转换机制
+</Heading>
+
+<Paragraph>
+    FP 模块的核心是 <Mark bold>_baseConvert.js</Mark>，它负责将标准 Lodash 方法转换为 FP 风格：
+</Paragraph>
+
+<BulletedList>
+    自动柯里化（Curry）- 所有多参数方法自动转换为柯里化版本
+    参数重排（Rearg）- 将 data-first 转换为 data-last 顺序
+    参数固定（Fixed）- 限制 iteratee 的参数数量
+    不可变操作（Immutable）- 修改对象时返回新对象而非修改原对象
+</BulletedList>
+
+<Heading level="3">
+    方法映射（_mapping.js）
+</Heading>
+
+<Paragraph>
+    <Mark bold>_mapping.js</Mark> 定义了方法之间的映射关系：
+</Paragraph>
+
+<Table>
+    <TableRow>
+        <TableCell>
+            <Mark bold>映射类型</Mark>
+        </TableCell>
+        <TableCell>
+            <Mark bold>说明</Mark>
+        </TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>
+            aliasToReal
+        </TableCell>
+        <TableCell>
+            别名到真实方法名的映射（如 each → forEach）
+        </TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>
+            aryMethod
+        </TableCell>
+        <TableCell>
+            按参数数量分组的方法（1-4 个参数）
+        </TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>
+            remap
+        </TableCell>
+        <TableCell>
+            重映射方法名（如 assignAll → assign）
+        </TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>
+            mutate
+        </TableCell>
+        <TableCell>
+            标记会修改原数组或对象的方法
+        </TableCell>
+    </TableRow>
+</Table>
+
+<Divider blockColor="light_grey" />
+
+<Heading level="2">
+    CI/CD 流程
+</Heading>
+
+<Paragraph>
+    Lodash 使用 GitHub Actions 进行持续集成和部署：
+</Paragraph>
+
+<BulletedList>
+    <Mark bold>ci-node.yml</Mark> - 在多个 Node.js 版本上运行测试（Node 4-25）
+    <Mark bold>ci-bun.yml</Mark> - 在 Bun 运行时上测试
+    <Mark bold>ci-browsers.yml</Mark> - 在浏览器（Chrome、Firefox、WebKit）中测试
+    <Mark bold>ci-docs.yml</Mark> - 测试文档生成
+    <Mark bold>ci-dist-sync.yml</Mark> - 验证 dist 文件与源码同步
+    <Mark bold>codeql.yml</Mark> - CodeQL 安全扫描
+    <Mark bold>scorecards.yml</Mark> - 供应链安全评分
+</BulletedList>
+
+<Divider blockColor="light_grey" />
+
+<Heading level="2">
+    治理架构
+</Heading>
+
+<Paragraph>
+    Lodash 由 <Mark bold>技术指导委员会（TSC）</Mark> 管理，负责项目的技术决策。
+</Paragraph>
+
+<Paragraph>
+    安全报告由 <Mark bold>安全分类团队</Mark> 处理，遵循负责任披露政策。
+</Paragraph>
+
+<Callout icon="ℹ️" blockColor="light_blue" borderColor="blue">
+    当前 TSC 成员包括 John-David Dalton（创建者）、Jon Church、Jordan Harband、Michał Lipiński、Tobie Langel 和 Ulises Gascón。
+</Callout>
