@@ -1,0 +1,28 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "name": "Lodash Documentation",
+  "navigation": {
+    "groups": [
+      {
+        "group": "Get Started",
+        "pages": ["introduction", "quickstart"]
+      },
+      {
+        "group": "Architecture",
+        "pages": ["architecture/overview"]
+      },
+      {
+        "group": "FP Module",
+        "pages": ["fp/introduction", "fp/conversion"]
+      },
+      {
+        "group": "API Reference",
+        "pages": ["api/array", "api/object", "api/function"]
+      },
+      {
+        "group": "Guides",
+        "pages": ["configuration", "security", "contributing"]
+      }
+    ]
+  }
+}
