@@ -1,0 +1,278 @@
+---
+title: FP 转换机制
+icon: ⚙️
+---
+
+<Heading level="1">
+    FP 转换机制
+</Heading>
+
+<Paragraph>
+    <Mark bold>convert</Mark> 是 FP 模块的核心，它将标准 Lodash 方法转换为 FP 风格。
+</Paragraph>
+
+<Divider blockColor="light_grey" />
+
+<Heading level="2">
+    convert 方法
+</Heading>
+
+<Paragraph>
+    <Mark bold>convert</Mark> 可以转换单个方法或整个 Lodash 实例：
+</Paragraph>
+
+<Paragraph textAlign="left" blockColor="light_grey">
+<Mark bold>javascript</Mark>
+<Mark color="grey">var convert = require('lodash/fp/\_baseConvert');</Mark>
+<Mark color="grey">var _ = require('lodash');</Mark>
+<Mark color="grey"></Mark>
+<Mark color="grey">// 转换单个方法</Mark>
+<Mark color="grey">var remove = convert('remove', \_.remove);</Mark>
+<Mark color="grey"></Mark>
+<Mark color="grey">// 转换整个 Lodash 实例</Mark>
+<Mark color="grey">var fp = convert(\_.runInContext());</Mark>
+</Paragraph>
+
+<Divider blockColor="light_grey" />
+
+<Heading level="2">
+    转换选项
+</Heading>
+
+<Paragraph>
+    convert 接受以下选项来控制转换行为：
+</Paragraph>
+
+<Table>
+    <TableRow>
+        <TableCell>
+            <Mark bold>选项</Mark>
+        </TableCell>
+        <TableCell>
+            <Mark bold>默认值</Mark>
+        </TableCell>
+        <TableCell>
+            <Mark bold>说明</Mark>
+        </TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>
+            cap
+        </TableCell>
+        <TableCell>
+            true
+        </TableCell>
+        <TableCell>
+            限制 iteratee 的参数数量
+        </TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>
+            curry
+        </TableCell>
+        <TableCell>
+            true
+        </TableCell>
+        <TableCell>
+            启用自动柯里化
+        </TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>
+            fixed
+        </TableCell>
+        <TableCell>
+            true
+        </TableCell>
+        <TableCell>
+            固定参数数量（使用 ary）
+        </TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>
+            immutable
+        </TableCell>
+        <TableCell>
+            true
+        </TableCell>
+        <TableCell>
+            不可变操作（返回新对象）
+        </TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>
+            rearg
+        </TableCell>
+        <TableCell>
+            true
+        </TableCell>
+        <TableCell>
+            重排参数顺序（data-last）
+        </TableCell>
+    </TableRow>
+</Table>
+
+<Divider blockColor="light_grey" />
+
+<Heading level="2">
+    使用示例
+</Heading>
+
+<Heading level="3">
+    默认转换
+</Heading>
+
+<Paragraph textAlign="left" blockColor="light_grey">
+<Mark bold>javascript</Mark>
+<Mark color="grey">var convert = require('lodash/fp/\_baseConvert');</Mark>
+<Mark color="grey">var _ = require('lodash');</Mark>
+<Mark color="grey"></Mark>
+<Mark color="grey">var remove = convert('remove', \_.remove);</Mark>
+<Mark color="grey">var array = [1, 2, 3, 4];</Mark>
+<Mark color="grey">var result = remove(function(n) { return n % 2 == 0; })(array);</Mark>
+<Mark color="grey"></Mark>
+<Mark color="grey">console.log(array);</Mark>
+<Mark color="grey">// => [1, 2, 3, 4] - 原数组未修改</Mark>
+<Mark color="grey"></Mark>
+<Mark color="grey">console.log(result);</Mark>
+<Mark color="grey">// => [1, 3] - 返回新数组</Mark>
+</Paragraph>
+
+<Heading level="3">
+    禁用某些转换
+</Heading>
+
+<Paragraph textAlign="left" blockColor="light_grey">
+<Mark bold>javascript</Mark>
+<Mark color="grey">var convert = require('lodash/fp/\_baseConvert');</Mark>
+<Mark color="grey">var _ = require('lodash');</Mark>
+<Mark color="grey"></Mark>
+<Mark color="grey">// 禁用柯里化</Mark>
+<Mark color="grey">var remove = convert('remove', \_.remove, { 'curry': false });</Mark>
+<Mark color="grey">remove([1, 2, 3, 4], function(n) { return n % 2 == 0; });</Mark>
+<Mark color="grey">// => [1, 3]</Mark>
+<Mark color="grey"></Mark>
+<Mark color="grey">// 禁用不可变操作</Mark>
+<Mark color="grey">var removeMutable = convert('remove', \_.remove, { 'immutable': false });</Mark>
+<Mark color="grey">var array = [1, 2, 3, 4];</Mark>
+<Mark color="grey">removeMutable(function(n) { return n % 2 == 0; })(array);</Mark>
+<Mark color="grey">// => [1, 3] - 原数组被修改</Mark>
+</Paragraph>
+
+<Divider blockColor="light_grey" />
+
+<Heading level="2">
+    方法级 convert
+</Heading>
+
+<Paragraph>
+    每个 FP 方法都有 <Mark>convert</Mark> 属性，可以转换回不同的配置：
+</Paragraph>
+
+<Paragraph textAlign="left" blockColor="light_grey">
+<Mark bold>javascript</Mark>
+<Mark color="grey">var fp = require('lodash/fp');</Mark>
+<Mark color="grey"></Mark>
+<Mark color="grey">// 使用方法的 convert</Mark>
+<Mark color="grey">var isArray = fp.isArray.convert({ 'curry': true });</Mark>
+<Mark color="grey">isArray()([1, 2, 3]);</Mark>
+<Mark color="grey">// => true</Mark>
+<Mark color="grey"></Mark>
+<Mark color="grey">// 转换别名方法</Mark>
+<Mark color="grey">var all = fp.all.convert({ 'rearg': false });</Mark>
+<Mark color="grey">all([0])(function(v) { return v > 0; });</Mark>
+<Mark color="grey">// => false</Mark>
+</Paragraph>
+
+<Divider blockColor="light_grey" />
+
+<Heading level="2">
+    核心转换函数
+</Heading>
+
+<Paragraph>
+    <Mark bold>_baseConvert.js</Mark> 内部使用以下函数实现转换：
+</Paragraph>
+
+<Heading level="3">
+    baseArity
+</Heading>
+
+<Paragraph>
+    创建固定参数数量的函数：
+</Paragraph>
+
+<Paragraph textAlign="left" blockColor="light_grey">
+<Mark bold>javascript</Mark>
+<Mark color="grey">// 限制函数只接受 2 个参数</Mark>
+<Mark color="grey">function baseArity(func, n) {</Mark>
+<Mark color="grey">  return n == 2</Mark>
+<Mark color="grey">    ? function(a, b) { return func.apply(undefined, arguments); }</Mark>
+<Mark color="grey">    : function(a) { return func.apply(undefined, arguments); };</Mark>
+<Mark color="grey">}</Mark>
+</Paragraph>
+
+<Heading level="3">
+    wrapImmutable
+</Heading>
+
+<Paragraph>
+    包装会修改原数据的方法，使其返回新对象：
+</Paragraph>
+
+<Paragraph textAlign="left" blockColor="light_grey">
+<Mark bold>javascript</Mark>
+<Mark color="grey">// 克隆第一个参数，修改克隆对象，返回克隆对象</Mark>
+<Mark color="grey">function wrapImmutable(func, cloner) {</Mark>
+<Mark color="grey">  return function() {</Mark>
+<Mark color="grey">    var args = Array(arguments.length);</Mark>
+<Mark color="grey">    args[0] = cloner.apply(undefined, args);</Mark>
+<Mark color="grey">    func.apply(undefined, args);</Mark>
+<Mark color="grey">    return args[0];</Mark>
+<Mark color="grey">  };</Mark>
+<Mark color="grey">}</Mark>
+</Paragraph>
+
+<Divider blockColor="light_grey" />
+
+<Heading level="2">
+    映射配置（_mapping.js）
+</Heading>
+
+<Paragraph>
+    转换过程依赖 <Mark bold>_mapping.js</Mark> 中的配置：
+</Paragraph>
+
+<BulletedList>
+    <Mark bold>aryMethod</Mark> - 按参数数量（1-4）分组的方法列表
+    <Mark bold>iterateeAry</Mark> - iteratee 应该接收的参数数量
+    <Mark bold>iterateeRearg</Mark> - iteratee 的参数重排配置
+    <Mark bold>methodRearg</Mark> - 方法的参数重排配置
+    <Mark bold>mutate</Mark> - 标记会修改原数据的方法
+    <Mark bold>skipFixed</Mark> - 跳过固定参数数量的方法
+    <Mark bold>skipRearg</Mark> - 跳过参数重排的方法
+</BulletedList>
+
+<Divider blockColor="light_grey" />
+
+<Heading level="2">
+    实际应用示例
+</Heading>
+
+<Paragraph textAlign="left" blockColor="light_grey">
+<Mark bold>javascript</Mark>
+<Mark color="grey">var fp = require('lodash/fp');</Mark>
+<Mark color="grey"></Mark>
+<Mark color="grey">// 创建一个自定义转换的 Lodash 实例</Mark>
+<Mark color="grey">var customLodash = fp.runInContext({</Mark>
+<Mark color="grey">  'cap': false,</Mark>
+<Mark color="grey">  'curry': true,</Mark>
+<Mark color="grey">  'fixed': false,</Mark>
+<Mark color="grey">  'immutable': true,</Mark>
+<Mark color="grey">  'rearg': true</Mark>
+<Mark color="grey">});</Mark>
+<Mark color="grey"></Mark>
+<Mark color="grey">// customLodash 现在使用自定义配置</Mark>
+<Mark color="grey">customLodash.add(2)(3);</Mark>
+<Mark color="grey">// => 5</Mark>
+</Paragraph>
